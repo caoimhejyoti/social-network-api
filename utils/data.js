@@ -1,63 +1,54 @@
-const names = [
-  'Mike',
-  'Olivia',
-  'Noah',
-  'Emma',
-  'Ethan',
-  'Isabella',
-  'James',
-  'Lily',
-  'Elijah',
-  'Aurora',
-  'Charlotte',
-  'Harper',
-  'Levi',
-  'Mateo',
-  'Smith',
-  'Young',
-  'Ling',
-  'Rodriguez',
-  'Davis',
-  'Garcia',
-  'Williams',
-  'Lopez',
-  'Green',
-  'Nelson',
-  'King',
-  'Lewis',
-  'Adams',
-  'Carter',
-  'Rivera',
-  'Roberts'
+const username = [
+  "amyStake",
+  "barbDwyer",
+  "paigeTurner",
+  "robynBanks",
+  "zoltanPepper",
+  "benDover",
+  "krystallBall",
+  "joeKing",
+  "justinCase",
+  "charlesMunk",
+  "loriDriver",
+  "ashHull",
+  "ipFreely",
+  "amandaHuggenkiss",
+  "jacquesStrap",
+  "ivanaTinkle",
+  "alCoholic",
+  "anitaBath",
+  "oliverClothesoff",
+  "anitaMan",
+  "seymourButz",
+  "mayaButtreeks",
+  "homerSexual",
+  "euraSnotball",
+  "mikeRotch",
+  "ollieTabooger",
+  "hughJass",
+  "heywoodUCuddleme",
+  "beaOProblem",
 ];
 
 const thoughts = [
-  'Today is a good Day!',
-  'Wow what a day!',
-  'Just keep swimming',
-  'So happy!',
-  'Sun is shining!',
-  'I need coffee!,'
-  'Cannot wait for this evening',
-  'Feeling excited!',
+  "Today is a good Day!",
+  "Wow what a day!",
+  "Just keep swimming",
+  "So happy!",
+  "Sun is shining!",
+  "I need coffee!",
+  "Cannot wait for this evening",
+  "Feeling excited!",
 ];
 
-const possiblereactions = [
-  '😀',
-  '😂',
-  '😍',
-  '🥳',
-  '🤯',
-  '😭',
-  '😡'
-];
+const possiblereactions = ["😀", "😂", "😍", "🥳", "🤯", "😭", "😡"];
 
 // Get a random item given an array
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // Gets a random full name
-const getRandomName = () =>
-  `${getRandomArrItem(names)} ${getRandomArrItem(names)}`;
+const getRandomUsername = () =>
+  `${getRandomArrItem(username)} ${getRandomArrItem(username)}`;
 
 const getRandomThoughts = (int) => {
   let results = [];
@@ -72,4 +63,4 @@ const getRandomThoughts = (int) => {
   return results;
 };
 
-module.exports = { getRandomName, getRandomThoughts};
+module.exports = { getRandomUsername, getRandomThoughts };

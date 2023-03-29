@@ -1,6 +1,6 @@
 const connection = require("../config/connection");
 const { User, Thought } = require("../models");
-const { getRandomName, getRandomThoughts } = require("./data");
+const { getRandomUsername, getRandomThoughts } = require("./data");
 
 connection.on("error", (err) => err);
 
@@ -15,7 +15,7 @@ connection.once("open", async () => {
   // const reactions = getRandomReactions(10);
 
   for (let i = 0; i < 20; i++) {
-    const fullName = getRandomName();
+    const fullName = getRandomUsername();
     const first = fullName.split(" ")[0];
     const last = fullName.split(" ")[1];
 
