@@ -1,21 +1,24 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
 const {
   getUsers,
   getSingleUser,
   createUser,
   updateUser,
-  deleteUser,
-  addFriend,
-  deleteFriend,
-} = require('./../../controllers/userController');
+  // deleteUser,
+  // addFriend,
+  // deleteFriend,
+} = require("./../../controllers/userController");
 
 // /api/users
-router.route('/').get(getUsers).get(getSingleUser).post(createUser).put(updateUser).delete(deleteUser);
+router.route("/").get(getUsers).post(createUser); //.delete(deleteUser);
 
-// FIXME: how to remove users associated thoughts when deleting user! 
+// FIXME: how to remove users associated thoughts when deleting user!
 
-// /api/users/:userId
-router.route('/:userId/friends/:friendId').post(addFriend).delete(deleteFriend);
+// /api/users/userId
+router.route("/:userId").get(getSingleUser).put(updateUser);
+
+// /api/users/:userId/friends/:friendId
+// router.route('/:userId/friends/:friendId').post(addFriend).delete(deleteFriend);
 
 module.exports = router;
