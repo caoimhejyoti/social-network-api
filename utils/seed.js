@@ -2,9 +2,10 @@ const connection = require("../config/connection");
 const { User, Thought } = require("../models");
 const {
   getRandomUsername,
+  getRandomEmail,
   getRandomThoughts,
-  getRandomFriends,
   getDBThoughts,
+  getRandomFriends,
 } = require("./data");
 
 connection.on("error", (err) => err);
@@ -21,8 +22,8 @@ connection.once("open", async () => {
 
   for (let i = 0; i < 5; i++) {
     const username = getRandomUsername();
-    const email = `${username}@test.com`;
-    const thoughts = getRandomThoughts(5);
+    const email = `${username}${getRandomEmail()}`;
+    const thoughts = getRandomThoughts(5); //CURRENTLY NOT CONNECTED TO THOUGHTS TABLE!
     const friends = getRandomFriends(5);
 
     users.push({
@@ -40,6 +41,6 @@ connection.once("open", async () => {
   console.table(users);
   console.table(thoughts);
   // console.table(reactions);
-  console.info("Seeding complete! 🌱");
+  console.info("🌱 SEEDING COMPLETE! 🌱");
   process.exit(0);
 });
