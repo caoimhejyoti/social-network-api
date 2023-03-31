@@ -4,6 +4,7 @@ const {
   getRandomUsername,
   getRandomThoughts,
   getRandomFriends,
+  getDBThoughts,
 } = require("./data");
 
 connection.on("error", (err) => err);
@@ -16,9 +17,9 @@ connection.once("open", async () => {
   // await Reaction.deleteMany({});
 
   const users = [];
-  // const thoughts = getRandomThoughts(5);
+  const thoughts = getDBThoughts(5);
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     const username = getRandomUsername();
     const email = `${username}@test.com`;
     const thoughts = getRandomThoughts(5);
@@ -33,11 +34,11 @@ connection.once("open", async () => {
   }
 
   await User.collection.insertMany(users);
-  // await Thought.collection.insertMany(thoughts);
+  await Thought.collection.insertMany(thoughts);
   // await Reaction.collection.insertMany(reactions);
 
   console.table(users);
-  // console.table(thoughts);
+  console.table(thoughts);
   // console.table(reactions);
   console.info("Seeding complete! 🌱");
   process.exit(0);
