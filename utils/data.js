@@ -44,11 +44,13 @@ const thoughts = [
 const possiblereactions = ["😀", "😂", "😍", "🥳", "🤯", "😭", "😡"];
 
 // Get a random item given an array
+const getRandomIndex = (arr) => Math.floor(Math.random() * arr.length);
+
+// Get a random item given an array
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // Gets a random full name
-const getRandomUsername = () =>
-  `${getRandomArrItem(username)} ${getRandomArrItem(username)}`;
+const getRandomUsername = () =>`${getRandomArrItem(username)}`;
 
 const getRandomThoughts = (int) => {
   let results = [];
@@ -63,4 +65,14 @@ const getRandomThoughts = (int) => {
   return results;
 };
 
-module.exports = { getRandomUsername, getRandomThoughts };
+const getRandomFriends = (int) => {
+  let results = [];
+  for (let i = 0; i < int; i++) {
+    results.push({
+      reactions: getRandomArrItem(getRandomUsername),
+    });
+  }
+  return results;
+}
+
+module.exports = { getRandomUsername, getRandomThoughts, getRandomFriends };
