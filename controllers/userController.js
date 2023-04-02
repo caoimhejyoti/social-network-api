@@ -6,6 +6,7 @@ module.exports = {
   getUsers(req, res) {
     User.find()
       .select("-__v")
+      .populate("thoughts")
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => {
         console.log(err);
