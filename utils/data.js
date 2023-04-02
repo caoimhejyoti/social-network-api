@@ -1,6 +1,6 @@
 const moment = require("moment");
 
-const username = [
+const usernameArr = [
   "amyStake",
   "barbDwyer",
   "paigeTurner",
@@ -31,6 +31,7 @@ const username = [
   "heywoodUCuddleme",
   "beaOProblem",
 ];
+const possibleFriends = [];
 
 const thoughts = [
   "Today is a good Day!",
@@ -58,8 +59,18 @@ const possiblereactions = ["😀", "😂", "😍", "🥳", "🤯", "😭", "😡
 //WORKING! DESCRIPTION: Get a random item given an array
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-//WORKING! DESCRIPTION: Gets a random username
-const getRandomUsername = () => `${getRandomArrItem(username)}`;
+//WORKING! DESCRIPTION: Gets a random username FIXME: splice out username from original array
+const getRandomUsername = () => {
+  const chosenUsername = `${getRandomArrItem(usernameArr)}`;
+  const index = usernameArr.indexOf(chosenUsername);
+  if (index > -1) {
+    usernameArr.splice(index, 1);
+  }
+  // console.log(usernameArr);
+  possibleFriends.push(chosenUsername);
+  // console.log(possibleFriends);
+  return chosenUsername;
+};
 
 //WORKING! DESCRIPTION: Gets a random email domain
 const getRandomEmail = () => `${getRandomArrItem(emails)}`;
@@ -79,53 +90,53 @@ const getRandomThoughts = (int, createdUsername) => {
 };
 
 // WORKING! DESCRIPTION: Gets a random reactions
-const getReactions = (int) => {
-  if (int === 1) {
-    return getRandomArrItem(possiblereactions);
-  }
-  let results = [];
-  for (let i = 0; i < int; i++) {
-    results.push({
-      reactionBody: getRandomArrItem(possiblereactions),
-      username: getRandomArrItem(username),
-    });
-  }
-  return results;
-};
+// const getReactions = (int) => {
+//   if (int === 1) {
+//     return getRandomArrItem(possiblereactions);
+//   }
+//   let results = [];
+//   for (let i = 0; i < int; i++) {
+//     results.push({
+//       reactionBody: getRandomArrItem(possiblereactions),
+//       username: getRandomArrItem(usernameArr),
+//     });
+//   }
+//   return results;
+// };
 
 // WORKING! DESCRIPTION: Gets a random thoughts for thoughts collection.
-const getDBThoughts = (int) => {
-  let results = [];
-  for (let i = 0; i < int; i++) {
-    let baseThought = getRandomThoughts(int);
-    results.push({
-      thoughtText: baseThought[i].thoughtText,
-      createdAt: moment().format("DD/MM/YYYY, h:mm:ss a"),
-      username: `${getRandomArrItem(username)}`,
-      // reactions: baseThought[i].reactions,
-    });
-  }
-  return results;
-};
+// const getDBThoughts = (int) => {
+//   let results = [];
+//   for (let i = 0; i < int; i++) {
+//     let baseThought = getRandomThoughts(int);
+//     results.push({
+//       thoughtText: baseThought[i].thoughtText,
+//       createdAt: moment().format("DD/MM/YYYY, h:mm:ss a"),
+//       username: `${getRandomArrItem(usernameArr)}`,
+//       // reactions: baseThought[i].reactions,
+//     });
+//   }
+//   return results;
+// };
 
 // FIXME: managed to get random usernames but they do not relate to other users created. currently resulting a blank array.
 // DESCRIPTION: Gets a random friends.
-const getRandomFriends = (int) => {
-  let results = [];
-  let B = 5;
-  let N = 0;
 
-  for (let i = 0; i < int; i++) {
-    let chooseFriends = () => {
-      num = Math.floor(Math.random() * username.length - N);
-      N = Math.min(N + 1, B);
-      friend = username.splice(num, 1);
-      username.push(friend);
-      return friend;
-    };
-    // console.log(chooseFriends());
-  }
-  return results;
+const getRandomFriends = (currentUser, users) => {
+  // NOTE: does this need to return the _id of friend, and not the username?
+  // console.log(users);
+  console.log("currentUser: " + currentUser);
+  // console.log("users: " + users.username);
+  console.log("possibleFriends: " + possibleFriends);
+  // let myPossibleFriends = [];
+  const index = possibleFriends.indexOf(currentUser);
+  console.log("index: " + index);
+  let myPossibleFriends = possibleFriends.map(possibleFriends.slice(index));
+
+  console.log(myPossibleFriends);
+  const chosenFriend = getRandomArrItem(myPossibleFriends);
+  console.log("chosenFriend" + chosenFriend);
+  return chosenFriend;
 };
 
 module.exports = {
@@ -133,5 +144,5 @@ module.exports = {
   getRandomEmail,
   getRandomThoughts,
   getRandomFriends,
-  getDBThoughts,
+  // getDBThoughts,
 };
