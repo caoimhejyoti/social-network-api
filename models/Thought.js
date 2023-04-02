@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+// require("./User");
 const moment = require("moment");
 
 // DESCRIPTION: Child schema - Reactions.
@@ -39,8 +40,14 @@ const thoughtSchema = new Schema(
     },
     username: {
       type: String,
-      require: true,
+      required: true,
     },
+    // [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "user",
+    //   },
+    // ],
     reactions: [reactionSchema], //FIXME: confirm working
   },
   {
@@ -53,7 +60,7 @@ const thoughtSchema = new Schema(
 
 // DESCRIPTION: Creating virtual property 'reactionCount' which gets the number of reponses attached to the current thought.
 thoughtSchema.virtual("reactionCount").get(function () {
-  return this.reactions.lenth;
+  return this.reactions.length;
 });
 
 // DESCRIPTION: Initialize our Thought model
