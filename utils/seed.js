@@ -15,7 +15,6 @@ connection.once("open", async () => {
   // drop existing collections
   await User.deleteMany({});
   await Thought.deleteMany({});
-  // await Reaction.deleteMany({});
 
   const users = [];
   // const thoughts = getDBThoughts(5); ASKBCS
@@ -43,7 +42,6 @@ connection.once("open", async () => {
 
   await User.collection.insertMany(users);
   // await Thought.collection.insertMany(thoughts);
-  // await Reaction.collection.insertMany(reactions);
 
   console.table(users);
   console.table(thoughts);
