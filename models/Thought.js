@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const moment = require("moment");
 
 // DESCRIPTION: Child schema - Reactions.
 const reactionSchema = new Schema({
@@ -17,7 +18,7 @@ const reactionSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: moment().format("DD/MM/YYYY, h:mm:ss a"),
     //FIXME: add getting method to format the timestamp on query.
   },
 });
@@ -33,7 +34,7 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
+      default: moment().format("DD/MM/YYYY, h:mm:ss a"),
       //FIXME: add getting method to format the timestamd on query.
     },
     username: {

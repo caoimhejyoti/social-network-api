@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 const username = [
   "amyStake",
   "barbDwyer",
@@ -68,7 +70,7 @@ const getRandomThoughts = (int) => {
   for (let i = 0; i < int; i++) {
     results.push({
       thoughtText: getRandomArrItem(thoughts),
-      createdAt: new Date(),
+      createdAt: moment().format("DD/MM/YYYY, h:mm:ss a"),
       reactions: getReactions(3),
     });
   }
@@ -97,7 +99,7 @@ const getDBThoughts = (int) => {
     let baseThought = getRandomThoughts(int);
     results.push({
       thoughtText: baseThought[i].thoughtText,
-      createdAt: new Date(),
+      createdAt: moment().format("DD/MM/YYYY, h:mm:ss a"),
       username: `${getRandomArrItem(username)}`,
       reactions: baseThought[i].reactions,
     });
