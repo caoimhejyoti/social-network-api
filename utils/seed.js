@@ -22,7 +22,8 @@ connection.once("open", async () => {
   for (let i = 0; i < 5; i++) {
     const username = getRandomUsername();
     const email = `${username}${getRandomEmail()}`;
-    const thoughts = getRandomThoughts(5); //FIXME: CURRENTLY NOT CONNECTED TO THOUGHTS TABLE!
+    const thoughts = getRandomThoughts(5, username);
+    console.log(thoughts);
     const friends = getRandomFriends(5);
     const newThoughts = await Thought.collection.insertMany(thoughts);
 

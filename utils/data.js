@@ -65,12 +65,13 @@ const getRandomUsername = () => `${getRandomArrItem(username)}`;
 const getRandomEmail = () => `${getRandomArrItem(emails)}`;
 
 // WORKING! DESCRIPTION: Gets a random thoughts
-const getRandomThoughts = (int) => {
+const getRandomThoughts = (int, createdUsername) => {
   let results = [];
   for (let i = 0; i < int; i++) {
     results.push({
       thoughtText: getRandomArrItem(thoughts),
       createdAt: moment().format("DD/MM/YYYY, h:mm:ss a"),
+      username: createdUsername,
       // reactions: getReactions(3), ASKBCS
     });
   }
@@ -101,7 +102,7 @@ const getDBThoughts = (int) => {
       thoughtText: baseThought[i].thoughtText,
       createdAt: moment().format("DD/MM/YYYY, h:mm:ss a"),
       username: `${getRandomArrItem(username)}`,
-      reactions: baseThought[i].reactions,
+      // reactions: baseThought[i].reactions,
     });
   }
   return results;
