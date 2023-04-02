@@ -71,7 +71,7 @@ const getRandomThoughts = (int) => {
     results.push({
       thoughtText: getRandomArrItem(thoughts),
       createdAt: moment().format("DD/MM/YYYY, h:mm:ss a"),
-      reactions: getReactions(3),
+      // reactions: getReactions(3), ASKBCS
     });
   }
   return results;
