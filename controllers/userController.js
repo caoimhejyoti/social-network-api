@@ -2,16 +2,21 @@ const User = require("./../models/User");
 const Thought = require("../models/Thought");
 
 module.exports = {
+  // Get all Users
   getUsers(req, res) {
     User.find()
-      .populate({ path: "thoughts", select: "-__v" })
-      .then((users) => res.json(users))
-      .catch((err) => res.status(500).json(err));
+      .select("-__v")
+      .then((dbUserData) => res.json(dbUserData))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   },
+  // Get a Single User
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
-      // .select("-__v")
-      .populate({ path: "thoughts", select: "-__v" })
+      .select("-__v")
+      // .populate({ path: "thoughts", select: "-__v" })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user with that ID" })
@@ -19,6 +24,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
+  // Create a Users
   createUser(req, res) {
     User.create(req.body)
       .then((dbUserData) => res.json(dbUserData))
@@ -38,8 +44,12 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   deleteUser(req, res) {
-    Thought.findById({ _id: req.params.userId });
-    User.findById({ _id: req.params.userId });
+    // need to look at how to delete connected thoughts.
+    User.findByIdAndDelete({ _id: req.params.userId }).then((user) =>
+      !user
+        ? res.status(404).json({ message: "No User with this id!" })
+        : Thought.deleteMany({ _id: { $in: user.thoughts } })
+    ).then;
   },
 
   // deleteUser
