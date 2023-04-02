@@ -4,14 +4,14 @@ const User = require("./../models/User");
 module.exports = {
   getAllThoughts(req, res) {
     Thought.find()
-    //   .populate("users")
+      .populate("username")
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json({ message: err.message }));
   },
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
-    //   .select("-__v")
-    //   .populate("users")
+      //   .select("-__v")
+      //   .populate("username")
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: "No Thought with that ID" })

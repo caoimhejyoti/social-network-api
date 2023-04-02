@@ -18,7 +18,6 @@ module.exports = {
     User.findOne({ _id: req.params.userId })
       .select("-__v")
       .populate("thoughts")
-      // .populate({ path: "thoughts", select: "-__v" })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user with that ID" })
@@ -39,6 +38,7 @@ module.exports = {
       { $set: req.body },
       { runValidators: true, new: true }
     )
+      .populate("thoughts")
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No User with this id!" })
@@ -49,13 +49,13 @@ module.exports = {
   // Delete a User
   deleteUser(req, res) {
     // need to look at how to delete connected thoughts.
-    User.findByIdAndDelete({ _id: req.params.userId })
+    User.findOneAndDelete({ _id: req.params.userId })
       // trying to get bonus - FIXME: when used, causing a timeout error.
-      // .then((user) =>
-      //   !user
-      //     ? res.status(404).json({ message: "No User with this id!" })
-      //     : Thought.deleteMany({ _id: { $in: user.thoughts } })
-      // )
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No User with this id!" })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } })
+      )
       .then(() =>
         res.status({
           message: "User with this id and their thoughts are deleted",
