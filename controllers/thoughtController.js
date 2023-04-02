@@ -10,8 +10,7 @@ module.exports = {
   },
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
-      //   .select("-__v")
-      //   .populate("username")
+      .populate("username")
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: "No Thought with that ID" })
