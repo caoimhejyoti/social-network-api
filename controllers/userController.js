@@ -7,6 +7,7 @@ module.exports = {
     User.find()
       .select("-__v")
       .populate("thoughts")
+      .populate("friends")
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => {
         console.log(err);
@@ -18,6 +19,7 @@ module.exports = {
     User.findOne({ _id: req.params.userId })
       .select("-__v")
       .populate("thoughts")
+      .populate("friends")
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user with that ID" })
@@ -47,7 +49,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  //FIXME: Delete a User
+  //WORKING! Delete a User
   deleteUser(req, res) {
     // need to look at how to delete connected thoughts.
     User.findOneAndDelete({ _id: req.params.userId })
@@ -58,27 +60,40 @@ module.exports = {
           : Thought.deleteMany({ _id: { $in: user.thoughts } })
       )
       .then(() =>
-        res.status({
+        res.json({
           message: "User with this id and their thoughts are deleted",
         })
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  // Add a Friend to the User
+  //WORKING!  Add a Friend to the User
   addFriend(req, res) {
-    User.updateOne(
+    User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: req.body },
+      { $addToSet: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
-      // .populate("thoughts")
       .populate("friends")
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No User with this id!" })
           : res.json(user)
       )
-      .catch((err) => res.status(500).json(err));
+      .catch((err) => res.status(500).json({ message: err.message }));
   },
-  // Delete a Friend from the User
+  //WORKING! Delete a Friend from the User
+  deleteFriend(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: req.params.friendId } },
+      { runValidators: true, new: true }
+    )
+      .populate("friends")
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No User with this id!" })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json({ message: err.message }));
+  },
 };
