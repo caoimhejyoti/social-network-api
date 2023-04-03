@@ -122,23 +122,30 @@ const getRandomThoughts = (int, createdUsername) => {
 // FIXME: managed to get random usernames but they do not relate to other users created. currently resulting a blank array.
 // DESCRIPTION: Gets a random friends.
 
-const getRandomFriends = (currentUser, users) => {
-  // NOTE: does this need to return the _id of friend, and not the username?
-  // console.log(users);
-  console.log("currentUser: " + currentUser);
-  // console.log("users: " + users.username);
-  console.log("possibleFriends: " + possibleFriends);
-  // let myPossibleFriends = [];
-  const index = possibleFriends.indexOf(currentUser);
-  console.log("index: " + index);
-  let myPossibleFriends = possibleFriends.map(possibleFriends.slice(index));
+// const getRandomFriends = (currentUser, users) => {
+//   // NOTE: does this need to return the _id of friend, and not the username?
+//   // console.log(users);
+//   console.log("currentUser: " + currentUser);
+//   // console.log("users: " + users.username);
+//   console.log("possibleFriends: " + possibleFriends);
+//   // let myPossibleFriends = [];
+//   const index = possibleFriends.indexOf(currentUser);
+//   console.log("index: " + index);
+//   let myPossibleFriends = possibleFriends.map(possibleFriends.slice(index));
 
-  console.log(myPossibleFriends);
+//   console.log(myPossibleFriends);
+//   const chosenFriend = getRandomArrItem(myPossibleFriends);
+//   console.log("chosenFriend" + chosenFriend);
+//   return chosenFriend;
+// };
+
+function getRandomFriends(currentUser) {
+  const myPossibleFriends = possibleFriends.filter(
+    (friend) => friend !== currentUser
+  );
   const chosenFriend = getRandomArrItem(myPossibleFriends);
-  console.log("chosenFriend" + chosenFriend);
   return chosenFriend;
-};
-
+}
 module.exports = {
   getRandomUsername,
   getRandomEmail,

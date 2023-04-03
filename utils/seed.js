@@ -48,7 +48,22 @@ connection.once("open", async () => {
   // for (let i = 0; i < users.length; i++) {
   //   let currentUser = users[i].username;
 
-  //   const friend = getRandomFriends(currentUser, users);
+  //   const friend = getRandomFriends(currentUser);
+  //   // const secondFriend = getRandomFriends(currentUser);
+
+  //   // console.log(friend);
+  //   // console.log(secondFriend);
+
+  //   // const result = users.find(user => user.username === friend);
+
+  //   // console.log(result._id);
+
+  //   // function findFriendId() {
+  //   //   idArr = users.filter((friend) => friend === users.username);
+  //   //   return idArr;
+  //   // };
+
+  //   // console.log(friendId);
 
   //   // const objIndex = [i];
   //   // console.log(users[objIndex]);
