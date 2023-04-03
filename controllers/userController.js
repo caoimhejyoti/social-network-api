@@ -53,7 +53,6 @@ module.exports = {
   deleteUser(req, res) {
     // need to look at how to delete connected thoughts.
     User.findOneAndDelete({ _id: req.params.userId })
-      // trying to get bonus - FIXME: when used, causing a timeout error.
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No User with this id!" })

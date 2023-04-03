@@ -45,7 +45,6 @@ module.exports = {
   deleteThought(req, res) {
     // need to look at how to delete connected thoughts.
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
-      // trying to get bonus - FIXME: when used, causing a timeout error.
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: "No thought with this id!" })
