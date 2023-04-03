@@ -50,7 +50,7 @@ API server for Social Network API running on port 3001!
 
 To see this application in operation, watch the live demo!
 
-[![Youtube screen grab of live demo recording.](./public/img/Screen%20Shot%202023-02-23%20at%2016.42.22.png)](LINK REQUIRED)
+[![Youtube screen grab of live demo recording.](public/img/social-media-api-screenshot.png)](https://youtu.be/YZnlmn8Cv5E)
 
 ## Future Developments
 
