@@ -139,17 +139,17 @@ const getRandomThoughts = (int, createdUsername) => {
 //   return chosenFriend;
 // };
 
-function getRandomFriends(currentUser) {
-  const myPossibleFriends = possibleFriends.filter(
-    (friend) => friend !== currentUser
-  );
-  const chosenFriend = getRandomArrItem(myPossibleFriends);
-  return chosenFriend;
-}
+// function getRandomFriends(currentUser) {
+//   const myPossibleFriends = possibleFriends.filter(
+//     (friend) => friend !== currentUser
+//   );
+//   const chosenFriend = getRandomArrItem(myPossibleFriends);
+//   return chosenFriend;
+// }
 module.exports = {
   getRandomUsername,
   getRandomEmail,
   getRandomThoughts,
-  getRandomFriends,
+  // getRandomFriends,
   // getDBThoughts,
 };

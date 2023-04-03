@@ -5,7 +5,7 @@ const {
   getRandomEmail,
   getRandomThoughts,
   // getDBThoughts,
-  getRandomFriends,
+  // getRandomFriends,
 } = require("./data");
 
 connection.on("error", (err) => err);
@@ -69,7 +69,7 @@ connection.once("open", async () => {
   //   // console.log(users[objIndex]);
   //   // console.log("Before update: ", users[objIndex]);
 
-  //   users[i].friends = `${friend}`;
+  //   users[i].friends.push(friend);
 
   //   // console.log("after update: ", users[objIndex]);
   // }

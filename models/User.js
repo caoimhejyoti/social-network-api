@@ -41,7 +41,7 @@ const userSchema = new Schema(
 
 // DESCRIPTION: Creating virtual property to user Schema to get and set the full name of the user.
 userSchema.virtual("getFriendCount").get(function () {
-  console.log(User.friends, User.friends.length);
+  // console.log(User.friends, User.friends.length);
   return this.friends.length;
 });
 

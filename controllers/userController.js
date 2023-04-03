@@ -11,7 +11,7 @@ module.exports = {
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => {
         console.log(err);
-        res.status(500).json(err);
+        res.status(500).json({ message: err.message });
       });
   },
   //WORKING! Get a Single User
