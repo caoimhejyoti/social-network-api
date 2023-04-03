@@ -49,6 +49,13 @@ connection.once("open", async () => {
   //   let currentUser = users[i].username;
 
   //   const friend = getRandomFriends(currentUser);
+
+  //   if (friend === users.username){
+  //     console.log(users);
+  //     let myFriend = users
+  //     // let friendId = users.
+  //     return
+  //   }
   //   // const secondFriend = getRandomFriends(currentUser);
 
   //   // console.log(friend);
