@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, now } = require("mongoose");
 // require("./User");
 const moment = require("moment");
 
@@ -19,7 +19,9 @@ const reactionSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: moment().format("DD/MM/YYYY, h:mm:ss a"),
+    default: now,
+    // moment().format("DD/MM/YYYY, h:mm:ss a"),
+
     //FIXME: add getting method to format the timestamp on query.
   },
 });
@@ -64,6 +66,6 @@ thoughtSchema.virtual("reactionCount").get(function () {
 });
 
 // DESCRIPTION: Initialize our Thought model
-const Thought = model("thought", thoughtSchema);
+const Thought = model("Thought", thoughtSchema);
 
 module.exports = Thought;
