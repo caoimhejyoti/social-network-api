@@ -33,7 +33,7 @@ module.exports = {
       { $set: req.body },
       { runValidators: true, new: true }
     )
-      .populate("user")
+      .populate("reactions")
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: "No thought with this id!" })
@@ -54,6 +54,21 @@ module.exports = {
         res.json({
           message: "thought with this id and its reactions are deleted",
         })
+      )
+      .catch((err) => res.status(500).json({ message: err.message }));
+  },
+  //WORKING!  Add a Reaction to the Thought
+  addReaction(req, res) {
+    reactionSchema.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $addToSet: { reactions: req.params.reactionBody } },
+      { runValidators: true, new: true }
+    )
+      .populate("reactions")
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No Thought with this id!" })
+          : res.json(thought)
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
