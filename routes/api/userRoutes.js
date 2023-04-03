@@ -13,8 +13,6 @@ const {
 // /api/users
 router.route("/").get(getUsers).post(createUser);
 
-// FIXME: how to remove users associated thoughts when deleting user!
-
 // /api/users/userId
 router.route("/:userId").get(getSingleUser).put(updateUser).delete(deleteUser);
 
