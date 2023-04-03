@@ -2,7 +2,7 @@ const User = require("./../models/User");
 const Thought = require("../models/Thought");
 
 module.exports = {
-  // WORKING! Get all Users
+  // DESCRIPTION: Get all Users
   getUsers(req, res) {
     User.find()
       .select("-__v")
@@ -14,7 +14,7 @@ module.exports = {
         res.status(500).json({ message: err.message });
       });
   },
-  //WORKING! Get a Single User
+  // DESCRIPTION: Get a Single User
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select("-__v")
@@ -27,13 +27,13 @@ module.exports = {
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  // WORKING! Create a User
+  // DESCRIPTION: Create a User
   createUser(req, res) {
     User.create(req.body)
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  //WORKING! Update a User
+  // DESCRIPTION: Update a User
   updateUser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -49,9 +49,8 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  //WORKING! Delete a User
+  // DESCRIPTION: Delete a User
   deleteUser(req, res) {
-    // need to look at how to delete connected thoughts.
     User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
         !user
@@ -65,7 +64,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  //WORKING!  Add a Friend to the User
+  // DESCRIPTION: Add a Friend to the User
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -80,7 +79,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  //WORKING! Delete a Friend from the User
+  // DESCRIPTION: Delete a Friend from the User
   deleteFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },

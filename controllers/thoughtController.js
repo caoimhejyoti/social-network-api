@@ -3,14 +3,14 @@ const User = require("../models/User");
 const reactionSchema = require("../models/Thought");
 
 module.exports = {
-  //WORKING! Get all Thoughts
+  // DESCRIPTION: Get all Thoughts
   getAllThoughts(req, res) {
     Thought.find()
       .populate("username")
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  //WORKING! Get a Single Thought
+  // DESCRIPTION: Get a Single Thought
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .populate("username")
@@ -21,9 +21,8 @@ module.exports = {
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  // FIXME: Create a Thought
+  // DESCRIPTION: Create a Thought
   createThought(req, res) {
-    // update user model then create thought
     Thought.create(req.body)
       .then((dbThoughtData) => {
         return User.findOneAndUpdate(
@@ -34,13 +33,13 @@ module.exports = {
       })
       .then((dbUserData) => {
         if (!dbUserData) {
-          return res.status(404).json({ message: "User not found" });
+          return res.status(404).json({ message: "No User with this id!" });
         }
-        res.json({ message: "thougt crrated successfully" });
+        res.json({ message: "Thought created!" });
       })
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  //FIXME: Update a Thought
+  // DESCRIPTION: Update a Thought
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -53,11 +52,10 @@ module.exports = {
           ? res.status(404).json({ message: "No thought with this id!" })
           : res.json(thought)
       )
-      .catch((err) => res.status(500).json(err));
+      .catch((err) => res.status(500).json({ message: err.message }));
   },
-  //WORKING! Delete a Thought
+  // DESCRIPTION: Delete a Thought
   deleteThought(req, res) {
-    // need to look at how to delete connected thoughts.
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
@@ -66,12 +64,12 @@ module.exports = {
       )
       .then(() =>
         res.json({
-          message: "thought with this id and its reactions are deleted",
+          message: "Thought with this id and its reactions are deleted",
         })
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
-  //WORKING!  Add a Reaction to the Thought
+  // DESCRIPTION: Add a Reaction to the Thought
   addReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -81,11 +79,12 @@ module.exports = {
       .populate("reactions")
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: "No Thought with this id!" })
+          ? res.status(404).json({ message: "No thought with this id!" })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
+  // DESCRIPTION: Delete a reaction from a Thought.
   deleteReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
