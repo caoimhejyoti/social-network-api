@@ -29,6 +29,7 @@ const usernameArr = [
   "heywoodUCuddleme",
   "beaOProblem",
 ];
+
 const possibleFriends = [];
 
 const thoughts = [
@@ -122,6 +123,7 @@ function getRandomFriends(currentUser) {
   const chosenFriend = getRandomArrItem(myPossibleFriends);
   return chosenFriend;
 }
+
 module.exports = {
   getRandomUsername,
   getRandomEmail,

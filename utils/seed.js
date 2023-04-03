@@ -36,7 +36,7 @@ connection.once("open", async () => {
     });
   }
 
-  // NOTE: Future developement - seeding reactions.
+  // NOTE: Future developement - seeding friends.
   // for (let i = 0; i < users.length; i++) {
   //   let currentUser = users[i].username;
 
