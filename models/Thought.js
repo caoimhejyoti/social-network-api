@@ -19,8 +19,8 @@ const reactionSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: now,
-    // moment().format("DD/MM/YYYY, h:mm:ss a"),
+    default: Date.now,
+    get: formatDate,
 
     //FIXME: add getting method to format the timestamp on query.
   },
@@ -37,7 +37,8 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: moment().format("DD/MM/YYYY, h:mm:ss a"),
+      default: Date.now,
+      get: formatDate,
       //FIXME: add getting method to format the timestamd on query.
     },
     username: {
