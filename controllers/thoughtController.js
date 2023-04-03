@@ -41,7 +41,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  //FIXME: Delete a Thought
+  //WORKING! Delete a Thought
   deleteThought(req, res) {
     // need to look at how to delete connected thoughts.
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
@@ -52,7 +52,7 @@ module.exports = {
           : reactionSchema.deleteMany({ _id: { $in: thought.reactions } })
       )
       .then(() =>
-        res.status({
+        res.json({
           message: "thought with this id and its reactions are deleted",
         })
       )
