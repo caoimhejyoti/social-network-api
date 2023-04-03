@@ -1,6 +1,5 @@
 const { Schema, model, Types } = require("mongoose");
 const formatDate = require("../utils/helpers");
-// require("./User");
 
 // DESCRIPTION: Child schema - Reactions.
 const reactionSchema = new Schema({
@@ -21,9 +20,6 @@ const reactionSchema = new Schema({
     type: Date,
     default: Date.now,
     get: (date) => formatDate(date),
-    //click handklers event - date
-
-    //FIXME: add getting method to format the timestamp on query.
   },
 });
 
@@ -40,19 +36,12 @@ const thoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       get: (date) => formatDate(date),
-      //FIXME: add getting method to format the timestamd on query.
     },
     username: {
       type: String,
       required: true,
     },
-    // [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "user",
-    //   },
-    // ],
-    reactions: [reactionSchema], //FIXME: confirm working
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
