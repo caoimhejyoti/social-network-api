@@ -73,17 +73,30 @@ module.exports = {
   },
   //WORKING!  Add a Reaction to the Thought
   addReaction(req, res) {
-    reactionSchema
-      .findOneAndUpdate(
-        { _id: req.params.thoughtId },
-        { $addToSet: { reactions: req.params.reactionBody } },
-        { runValidators: true, new: true }
-      )
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $addToSet: { reactions: req.body } },
+      { runValidators: true, new: true }
+    )
       .populate("reactions")
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: "No Thought with this id!" })
           : res.json(thought)
+      )
+      .catch((err) => res.status(500).json({ message: err.message }));
+  },
+  deleteReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { runValidators: true, new: true }
+    )
+      .populate("reactions")
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No thought with this id!" })
+          : res.json(user)
       )
       .catch((err) => res.status(500).json({ message: err.message }));
   },
