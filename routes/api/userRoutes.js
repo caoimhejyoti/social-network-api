@@ -6,7 +6,7 @@ const {
   createUser,
   updateUser,
   deleteUser,
-  // addFriend,
+  addFriend,
   // deleteFriend,
 } = require("./../../controllers/userController");
 
@@ -16,9 +16,14 @@ router.route("/").get(getUsers).post(createUser);
 // FIXME: how to remove users associated thoughts when deleting user!
 
 // /api/users/userId
-router.route("/:userId").get(getSingleUser).put(updateUser).delete(deleteUser);
+router
+  .route("/:userId")
+  .get(getSingleUser)
+  .put(updateUser)
+  .delete(deleteUser)
+  .post(addFriend);
 
 // /api/users/:userId/friends/:friendId
-// router.route('/:userId/friends/:friendId').post(addFriend).delete(deleteFriend);
+router.route("/:userId/friends/:friendId"); //.delete(deleteFriend);
 
 module.exports = router;

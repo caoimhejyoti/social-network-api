@@ -41,23 +41,23 @@ connection.once("open", async () => {
         newThoughts.insertedIds["3"],
         newThoughts.insertedIds["4"],
       ],
-      friends: "TBC",
+      friends: [],
     });
   }
 
-  for (let i = 0; i < users.length; i++) {
-    let currentUser = users[i].username;
+  // for (let i = 0; i < users.length; i++) {
+  //   let currentUser = users[i].username;
 
-    const friend = getRandomFriends(currentUser, users);
+  //   const friend = getRandomFriends(currentUser, users);
 
-    // const objIndex = [i];
-    // console.log(users[objIndex]);
-    // console.log("Before update: ", users[objIndex]);
+  //   // const objIndex = [i];
+  //   // console.log(users[objIndex]);
+  //   // console.log("Before update: ", users[objIndex]);
 
-    users[i].friends = `${friend}`;
+  //   users[i].friends = `${friend}`;
 
-    // console.log("after update: ", users[objIndex]);
-  }
+  //   // console.log("after update: ", users[objIndex]);
+  // }
 
   // console.log(users);
 
